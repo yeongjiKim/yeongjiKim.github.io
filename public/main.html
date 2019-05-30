@@ -1,0 +1,257 @@
+<html lang="ko">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;" charset="utf-8">
+        <meta charset='euc-kr'>
+        <link rel="shortcut icon" type="image/x-icon" href="./img/insta.png">
+        <title>Instagram</title>  
+        <style>
+            @media(max-width:1000px){
+               
+            }
+            @media(max-width:500px){
+                div.search{
+                    display:none;
+                }
+            }
+            body{
+                background-color:#fafafa;
+                margin:0;
+                padding:0;
+            }
+            .top{
+                position:fixed;
+                width:100%;
+                height:100px;
+                z-index:3;
+                border-bottom:1px solid #e6e6e6;
+                margin:0;
+                background-color:white;
+            }
+            .main{
+                margin-top:20px;
+                margin-left:20%;
+            }
+            .search{
+                width:200px;
+                height:30px;
+                border:1px solid #e6e6e6;
+                border-radius:3px;
+                position:relative;
+                left:100px;
+                top:-16px;
+            }
+            .topclick{
+                float:right;
+                position:relative;
+                margin-top:20px;
+                margin-right:20%;
+            }
+            .main_body{
+                background-color:none;
+            }
+            .table{
+                width:600px;
+                height:840px;
+                border:1px solid #e6e6e6;
+                position:relative;
+                top:150px;
+                margin:0px auto;
+                background-color:white;
+                margin-bottom:50px;
+            }            
+            #ser{
+                width:100%;
+                height:100%;
+                border:1px solid transparent;
+                text-align:center;
+            }
+            #user{
+                border-bottom:1px solid #e6e6e6;
+                height:50px;
+            }
+            .img_size{
+                height:30px;
+                width:30px;
+                border:1px solid black;
+                border-radius:20px;
+                margin:10px;
+                position:relative;
+                top:-10px;
+            }
+            .username{
+                width:30px;
+                height:20px;
+                position:relative;
+                top:10px;
+            }
+            .list_1{
+                position: relative;
+                float:right;
+                top:15px;
+                right:20px;
+            }
+            .list_2{
+                position: relative;
+                float:right;
+                top:8px;
+                right:20px;
+            }
+            #imgsize{
+                width:600px;
+                height:630px;
+            }
+            #iconsize{
+                width:35px;
+                height:35px;
+            }
+            .content{
+                width:600px;
+                height:160px;
+            }
+            .icon{
+                position:relative;
+                top:10px;
+                left:10px;
+            }
+            .hashtag{
+               height:40px;
+
+            }
+            .likefont{
+                position:relative;
+                left:10px;
+                top:-10px;
+            }
+            .inline{
+                display:inline-block;
+            }
+            #heartbutton{
+                background-color:white;
+                border:none;
+                outline:none;
+            }
+            a{
+                text-decoration:none;
+                color:navy;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div class='top'>
+            <div class='inline main'> 
+                <button id='heartbutton' style='cursor:pointer' onclick=mainback();><img src="./img/instagram.PNG"></button>
+            </div>
+            <div class='inline search'>
+                <form action='search.html' method=GET name='seraction'>
+                    <input type='hidden' id='token' name='token'>
+                    <input id="ser" name="ser" type="text" placeholder="검색"> 
+                </form>
+            </div>
+            <div class='inline topclick'>
+                <img src='./img/top.png'>
+            </div>
+        </div>
+        <div id=main_body class='main_body'></div>
+
+        <script tpye="text/javascript">
+            var state=[];
+            function heartchange(tk,name,no,i){
+                if(state[i]==1){
+                    document.heart[i].src="/img/heart.png";
+                    $.get("http://localhost/dellikely?token="+tk+"&name="+name+"&no="+no,{});
+                    $.get("http://localhost/-likely?no="+no,{});
+                    state[i]=0;  
+                    document.getElementsByName("likes")[i].innerText=document.getElementsByName("likes")[i].innerText*1-1+"";
+                }
+                else{
+                    document.heart[i].src="/img/fullheart.png";
+                    $.get("http://localhost/likely?token="+tk+"&name="+name+"&no="+no,{});
+                    $.get("http://localhost/addlikely?no="+no,{});
+                    state[i]=1;
+                    document.getElementsByName("likes")[i].innerText=document.getElementsByName("likes")[i].innerText*1+1+"";
+                }
+            }
+
+            
+
+            const makeHashtag = (hashtags)=>{
+                const ht = hashtags.split("#");
+                const name=location.href.split("token=")[1]
+                let result = "";
+
+                for(var i=1;i< ht.length;i++ ){
+                    result += `
+                        <a href='/search.html?token=${name}/?ser=${ht[i]}'>${"#"+ht[i]}</a>
+                    `;
+                }
+                return result;
+            }
+
+            const makeTable = (name,image,numoflike,hashtags,date,no,i,tk)=>{
+                state[i]=0;
+                return `
+                    <div class='table'>
+                        <div id='user'>
+                            <div class='img_size inline'><img src=''></div>
+                            <div class='inline username'>
+                                ${name}
+                            </div>
+                            <div class='inline list_1'><img src="./img/list.png"></div>
+                        </div>
+                        <div class='pic'>
+                            <div><img id='imgsize' src='${image}' ></div>
+                            <div class='inline icon'><button id='heartbutton' type='submit' style='cursor:pointer' onclick="heartchange('${tk}','${name}',${no},${i});"><img id='iconsize' name='heart' src='/img/heart.png'></button></div>
+                            <div class='inline icon'><img id='iconsize' src='/img/comment.png'></div>
+                            <div class='inline list_2'><img id='iconsize' src='/img/bookmark.png'></div>
+                        </div>
+                        <div class='content'>
+                            <div class='likefont'><h5 >
+                                    좋아요 <font name="likes">${numoflike}</font>개
+                            </h5></div>
+                            <div class='hashtag'>
+                                <div class='inline likefont'><h5>
+                                    ${name}
+                                </h5></div>
+                                <div class=inline>${makeHashtag(hashtags)}</div>
+                            </div>
+                            <div class='date'>
+                                ${date}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            const fillContents = (tk) =>{
+                $.get("http://localhost/info?token="+tk,{}).done((r)=>{
+                    for(var i=0;i<r.length;i++){
+                        const main_body = document.getElementById('main_body');
+                        main_body.innerHTML += makeTable(
+                            r[i].user_id ,
+                            r[i].pictures,
+                            r[i].likely,
+                            r[i].hashtag,
+                            r[i].date,
+                            r[i].no,
+                            i,
+                            tk
+                        );
+                    }
+                });
+            }
+
+            function mainback(){
+                const myToken=location.href.split("token=")[1]
+                location.href='main?token='+myToken;
+            }
+            
+            window.onload = ()=>{
+                const myToken = location.href.split("token=")[1]
+                document.getElementById('token').value=myToken;
+                fillContents(myToken);
+            };
+        </script>
+    </body>
+
+</html>
