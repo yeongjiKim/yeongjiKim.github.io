@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" type="image/x-icon" href="./img/insta.png">
+        <title>Instagram login</title>
+        <style>
+            body{
+                background-color:#fafafa;
+            }
+            .box{
+                margin:0 auto;
+                width:350px;
+                height:450px;
+                border:1px solid #e6e6e6;
+                position:relative;
+                background-color:white;
+            }
+            .img_box{
+                width:350px;
+                height:80px;
+                text-align:center;
+                margin-top:30px;
+            }
+            .login_box{
+                width:350px;
+                height:350px;
+                text-align:center;
+            }
+            .login_form{
+              margin-bottom:10px;
+                
+            }
+            .form{
+                border-radius:3px;
+                width:260px;
+                height:35px;
+                padding:10px;
+                background-color:#fafafa;
+                border:1px solid #e6e6e6;
+            }
+            .pass{
+                width:350px;
+                height:30px;
+                text-align:right;
+                margin-left:-45px;
+                font-size:14px;
+                margin-top:14px;
+            }
+            .loginbox{
+                margin-top:10px;
+                text-align:center;
+            }
+            #login_button{
+                color:white;
+                background-color:skyblue;
+                width:260px;
+                height:35px;
+                border-radius:3px;
+                border:1px solid #e6e6e6;
+                font-size:13px;
+                text-align:center;
+            }
+            .flogin{
+                color:navy;
+                text-align:center;
+                font-size:14px;
+                margin-top:30px;
+            }
+            .box2{
+                width:350px;
+                height:70px;
+                background-color:white;
+                border:1px solid #e6e6e6;
+                position:relative;
+                margin:0 auto;
+                margin-top:10px;
+                text-align:center;
+                
+            }
+            .box2_center{
+                color:gray;
+                font-size:14px;
+                margin-top:25px;
+            }
+            a{
+                text-decoration: none;
+                color:navy;
+            }
+            .or{
+                color:gray;
+                font-size:13px;
+                margin-top:12px;
+                text-align:center;
+            }
+            .inline{
+                display:inline-block;
+            }
+        </style>
+        <script>
+           
+        </script>
+    </head>
+    <body>
+        <div class='box'> 
+            <div class='img_box'><img src='./img/Instag.PNG'></div>
+            <div class='login_box'>
+                <form action='data_login' method=POST>
+                    <div class='login_form'><input class='form' id='user_id' name='id' type='text' placeholder='전화번호, 사용자 이름 또는 이메일'></div>
+                    <div class='login_form'><input class='form' id='user_password' name='password' type='password' placeholder='비밀번호'></div>
+                <div class='pass'><a href=''>비밀번호를 잊으셨나요?</a></div>
+                <div class='loginbox'>
+                    <button id='login_button'>로그인</button>
+                </form>
+           </div>
+           <div class='or'>----------------&nbsp;&nbsp;&nbsp;또는&nbsp;&nbsp;&nbsp;----------------</div>
+           <div class='flogin'>Facebook으로 로그인</div>
+        </div>
+        <div class='box2'>
+            <div class='box2_center'>계정이 없으신가요?<a href=''>가입하기</a></div>
+        </div>
+    </body>
+</html>

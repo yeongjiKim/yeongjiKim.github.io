@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body{
+                background:rgba(0,0,0,0.3);
+            }
+            a{
+                text-decoration: none;
+            }
+            .box{
+                background:#fff;
+                opacity: 1;
+                position:fixed;
+                width:850px;
+                height:600px;
+                border:1px solid #efefef;
+                top:calc(50% - 335px);
+                left:calc(50% - 405px);
+            }
+            .imgbox{
+                position: absolute;;
+                width:60%;
+                height:100%;
+                border:1px solid yellow;
+            }
+            .letterbox{
+                position: absolute;
+                width:40%;
+                height:100%;
+                border:1px solid blue;
+                left:60%;
+            }
+            .host{
+                width:100%;
+                height:70px;
+                border-bottom:1px solid #efefef;
+            }
+            .idimg_size{
+                height:30px;
+                width:30px;
+                border:1px solid #999;
+                border-radius:20px;
+                position:relative;
+                left:20px;
+            }
+            .user_id{
+                position:relative;
+                top:20px;
+                left:30px;
+                font-size:12px;
+            }
+            .fcolor{
+                position: relative;
+                top:20px;
+                left:30px;
+            }
+            .comment{
+                width:100%;
+                height:380px;
+                border-bottom:1px solid #999;
+            }
+            .heart{
+                width:100%;
+                height:90px;
+                border-bottom:1px solid #999;
+            }
+            .comm{
+                height:60px;
+                width:100%;
+            }
+            #comment{
+                height:30px;
+                border:none;
+                width:80%;
+                position: relative;
+                top:15px;
+                left:20px;
+                outline:none;
+            }
+            .but_loc{
+             position: relative;
+             top:-15px;
+             left:85%;
+            }
+           #button{
+               border:none;
+               background-color:#fff;
+                outline:none;
+           }
+            .inline{
+                display:inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='box'>
+           
+                <div class='imgbox inline'>
+                    <img src='./img/'>
+                </div>
+                <div class='letterbox inline'>
+                    <div class='host'>
+                        <div class='idimg_size inline'><a href=''><img src=''></a></div>
+                        <div class='user_id inline'><a href='' style="color:black"><strong>user_id </strong></a>&nbsp•</div>
+                        <div class='inline fcolor'><strong><a href='' style="  color:#3897f0;">팔로우</a></strong></div>
+                    </div>
+                    <div class='comment'>
+
+                    </div>
+                    <div class='heart'></div>
+                        
+                    <div class='comm inline'>
+                        <input id='comment'type="text" placeholder="댓글 달기..." style="color:gray">
+                        <div class='but_loc'><button id='button' style="color:#3897f0"><strong>게시</strong></button></div>
+                    </div>
+                </div>
+        
+        </div>
+        <script>
+
+
+        </script>
+    </body>
+</html>

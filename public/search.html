@@ -1,0 +1,198 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" type="image/x-icon" href="./img/insta.png">
+        <style>
+            body{
+                margin:0px;
+                padding:0px;
+                background-color:#fafafa
+            }
+            .top{
+                position:fixed;
+                width:100%;
+                height:100px;
+                z-index:3;
+                border-bottom:1px solid #e6e6e6;
+                margin:0;
+                background-color:white;
+            }
+            .main{
+                margin-top:20px;
+                margin-left:20%;
+            }
+            .search{
+                width:200px;
+                height:30px;
+                border:1px solid #e6e6e6;
+                border-radius:3px;    
+                position:relative;
+                
+                top:-16px;
+            }
+            .topclick{
+                float:right;
+                position:relative;
+                margin-top:20px;
+                margin-right:20%;
+            }
+            .represent{  
+               display:fixed;
+                position:relative;
+                top:100px;
+                -webkit-box-flex: 1;
+                flex-grow:1;
+            }
+            .represent_img{
+                width:200px;
+                height:100px;
+            }
+            .tagname{
+                font-size:28px;
+                color:#353535;
+                margin-top:100px;
+            }
+            .p_post{
+                width:1000px;
+                position:relative;
+                height:700px;
+                margin:0px auto;
+            }
+            .inline{
+                display:inline-block;
+            }
+            #ser{
+                width:100%;
+                height:100%;
+                border:1px solid transparent;
+                text-align:center;
+            }
+            #pn_post{
+                color:gray;
+                height:20px;
+                margin-left:15px;
+            }
+            .img_space{
+                position:relative;
+                margin:15px;
+                overflow:hidden;
+            }
+            .img_size{
+                width:293px;
+                height:293px;
+                cursor:pointer;
+            }
+            
+            .icon{
+                position:absolute;
+                height:100%;
+                background:rgba(0,0,0,0.3);
+                width:100%;
+                opacity:0;
+         
+                transition:0.5s ease;
+                right:1;
+                text-align:center;
+            }
+           div.img_space:hover .icon{
+                opacity:1;
+            }
+           #icon1_space{
+                position:relative;
+                top:136px;
+                left:-25px;
+                height:24px;
+                width:24px;
+           }
+           #icon2_space{
+                position:relative;
+                top:136px;
+                right:-25px;
+                height:24px;
+                width:24px;
+           }
+            #button{
+                background-color:white;
+                border:none;
+                outline:none;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            function getPara(){
+                var val=location.href.substr(
+                    location.href.lastIndexOf('=')+1
+                );
+                return val;
+            }
+            document.title="#"+decodeURIComponent(getPara())+" 해시태그 · Instagram";
+        </script>
+    </head>
+    <body>
+        <div class='top'>
+            <div class='inline main'><button id='button' style="cursor:pointer" onclick="backmain();"><img src="./img/instagram.PNG"></button>
+            </div>
+            <div class='inline search'>
+                <form action="/search.html" method=GET>
+                    <input type='hidden' id='token' name='token'>
+                    <input id="ser" name="ser" type="text" placeholder="검색"> 
+                </form>
+            </div>
+            <div class='inline topclick'>
+                <img src='./img/top.png'>
+            </div>
+        </div>
+
+        <div class='represent'>
+            <div>
+                <div class='represent_img inline'><img></div>
+                <div class='inline tagname'>#<script>document.write(decodeURIComponent(getPara()));</script></div>
+            </div>
+            <div class="p_post">
+                <div id="pn_post">최근 게시물</div>
+                <div class="pic_post">
+                    <div id="post"></div>
+                    <div></div>
+                </div>
+                    
+                </div>
+            </div>
+        </div>
+       <script>
+            
+            function printitem(data){
+                html= "<a href='/p?no="+data.no+"'><div class='inline img_space'>"
+                        +"<img class='img_size' id='img_size' src='"+data.pictures+"'>"
+                        +"<div class='inline icon'>"
+                            +"<img id='icon1_space' src='./img/blackheart.png'>"
+                            +"<img id='icon2_space' src='./img/blackcomment.png'>"
+                        +"</div>"
+                    +"</div></a>";
+                 return html;
+            }
+
+            function backmain(){
+                const myToken = location.href.split("token=")[1].split("&")[0];
+               location.href='main?token='+myToken;
+            }
+            console.log(getPara());
+            $.ajax({
+                 url:'search',
+                 type:'get',
+                 data:{"ser":decodeURIComponent(getPara())},
+                 success:function(data){
+                     var html = ""
+                     for (var i =0;i<data.length;i++){
+                         html+=printitem(data[i]);
+                     }
+                     document.getElementById("post").innerHTML = html;
+                 }
+             }
+            );
+            window.onload = ()=>{
+                const myToken = location.href.split("token=")[1].split("&")[0];
+                document.getElementById('token').value=myToken;
+            };
+        </script>
+    </body>
+</html>
